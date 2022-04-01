@@ -3,6 +3,8 @@ import PokemonCard from "./PokemonCard";
 import Container from "@mui/material/Container";
 import { useStyles, theme } from "./pokemonListStyles";
 import { ThemeProvider } from "@mui/material/styles";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 const PokemonsList = () => {
   const classes = useStyles();
