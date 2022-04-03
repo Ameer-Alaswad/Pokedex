@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const PokemonsData = ({ pokemonsData }) => {
+const PokemonsNamesAndNumbers = ({ pokemonsData }) => {
   return (
     <div>
       {pokemonsData.map((data, i) => {
@@ -17,4 +17,4 @@ const PokemonsData = ({ pokemonsData }) => {
   );
 };
 
-export default PokemonsData;
+export default PokemonsNamesAndNumbers;

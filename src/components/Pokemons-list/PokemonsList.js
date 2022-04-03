@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import * as React from "react";
-import PokemonsData from "./PokemonsData";
+import PokemonsNamesAndNumbers from "./PokemonsNamesAndNumbers";
 import Container from "@mui/material/Container";
 import { useStyles, theme } from "./pokemonListStyles";
 import { ThemeProvider } from "@mui/material/styles";
@@ -25,7 +24,7 @@ const PokemonsList = () => {
         className={classes.pokemonsListContainer}
         sx={theme.custom.pokemonsListContainer.sx}
       >
-        <PokemonsData pokemonsData={pokemonsData} />
+        <PokemonsNamesAndNumbers pokemonsData={pokemonsData} />
       </Container>
     </ThemeProvider>
   );
