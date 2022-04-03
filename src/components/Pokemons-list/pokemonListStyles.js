@@ -4,6 +4,7 @@ import { createTheme } from "@mui/material/styles";
 export const useStyles = makeStyles(() => ({
   pokemonsListContainer: {
     height: "100%",
+    marginTop: "20px",
   },
 }));
 
@@ -12,7 +13,7 @@ export const theme = createTheme({
     pokemonsListContainer: {
       sx: {
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         alignItems: "center",
         flexWrap: "wrap",
       },
