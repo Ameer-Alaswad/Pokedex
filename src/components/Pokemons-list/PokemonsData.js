@@ -7,7 +7,7 @@ const PokemonsData = ({ pokemonsData }) => {
         let pokemonName = data.name;
         let pokemonNumber = i + 1;
         return (
-          <div>
+          <div key={i}>
             <p>{pokemonName}</p>
             <p>{pokemonNumber}</p>
           </div>
