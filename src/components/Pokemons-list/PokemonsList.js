@@ -3,19 +3,18 @@ import PokemonsNamesAndNumbers from "./PokemonsNamesAndNumbers";
 import Container from "@mui/material/Container";
 import { useStyles, theme } from "./pokemonListStyles";
 import { ThemeProvider } from "@mui/material/styles";
+import { useQuery } from "react-query";
 import axios from "axios";
 
 const PokemonsList = () => {
   const [pokemonsData, setPokemonData] = useState([]);
-  const getData = () => {
-    axios.get("https://pokeapi.co/api/v2/pokemon").then((response) => {
-      setPokemonData(response.data.results);
-    });
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  async function fetchPokemons() {
+    const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon");
+    setPokemonData(data);
+    return data;
+  }
+  const { data, error, isError, isLoading } = useQuery("posts", fetchPokemons);
+  console.log("first", data);
 
   const classes = useStyles();
   return (
@@ -24,7 +23,17 @@ const PokemonsList = () => {
         className={classes.pokemonsListContainer}
         sx={theme.custom.pokemonsListContainer.sx}
       >
-        <PokemonsNamesAndNumbers pokemonsData={pokemonsData} />
+        {pokemonsData.results?.map((data, i) => {
+          let pokemonName = data.name;
+          let pokemonNumber = i + 1;
+          return (
+            <PokemonsNamesAndNumbers
+              key={pokemonNumber}
+              pokemonName={pokemonName}
+              pokemonNumber={pokemonNumber}
+            />
+          );
+        })}
       </Container>
     </ThemeProvider>
   );
