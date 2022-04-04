@@ -1,11 +1,10 @@
 import * as React from "react";
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function PokemonsNamesAndNumbers({
@@ -25,38 +24,37 @@ export default function PokemonsNamesAndNumbers({
       keepPreviousData: true,
     }
   );
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
+
   if (isError) {
     return <div>Error! {error.message}</div>;
   }
+
   return (
-    <Card sx={{ maxWidth: 345, minWidth: 400 }}>
-      <CardActionArea>
-        {data?.map((info, i) => {
-          if (pokemonName === info.name) {
-            return (
+    <Card sx={{ maxWidth: 345, minWidth: 300 }}>
+      {data?.map((info, i) => {
+        if (pokemonName === info.name) {
+          return (
+            <Link key={i} to={"/pokemon/" + info.name}>
               <CardMedia
-                key={i}
                 component="img"
                 height="140"
                 image={info.sprites.front_default}
                 alt="green iguana"
               />
-            );
-          }
-          return "she";
-        })}
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {pokemonName}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {pokemonNumber}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+            </Link>
+          );
+        }
+        return "she";
+      })}
+      <CardContent>
+        <Typography data-user="123" gutterBottom variant="h5" component="div">
+          {pokemonName}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {pokemonNumber}
+          {}
+        </Typography>
+      </CardContent>
     </Card>
   );
 }
