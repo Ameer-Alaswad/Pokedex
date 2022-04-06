@@ -1,7 +1,7 @@
 import "./App.css";
 import PokemonsList from "./components/Pokemons-list/PokemonsList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PokemonDetails from "./components/Pokemons-list/PokemonData";
+import PokemonData from "./components/Pokemons-list/PokemonData";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<PokemonsList />} />
-          <Route path="/pokemon/:id" element={<PokemonDetails />} />
+          <Route path="/pokemon/:id" element={<PokemonData />} />
         </Routes>
       </div>
     </BrowserRouter>

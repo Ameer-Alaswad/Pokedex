@@ -9,7 +9,9 @@ import axios from "axios";
 ///////////////////////////////////////////////
 const PokemonsList = () => {
   const classes = useStyles();
-  const [page, setPage] = useState(51);
+  const [pokemonsDisplayed, setPokemonsDisplayed] = useState(25);
+  const [loadPokemonsButtonVisibility, setLoadPokemonsButtonVisibility] =
+    useState(true);
   async function fetchPokemons({ queryKey }) {
     const { data } = await axios.get(
       "https://pokeapi.co/api/v2/pokemon?limit=" + queryKey[1] + "&offset=0"
@@ -17,19 +19,22 @@ const PokemonsList = () => {
     return data;
   }
   const { data, error, isError, isLoading } = useQuery(
-    ["posts", page],
+    ["posts", pokemonsDisplayed],
     fetchPokemons,
     {
       keepPreviousData: true,
     }
   );
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (isError) {
-    return <div>Error! {error.message}</div>;
-  }
+  if (isLoading) return <div>Loading...</div>;
+
+  if (isError) return <div>Error! {error.message}</div>;
+
+  const loadMorePokemons = () => {
+    data.next === null
+      ? setLoadPokemonsButtonVisibility(false)
+      : setPokemonsDisplayed(pokemonsDisplayed + 25);
+  };
   /////////////////////////////////////////////
   ///////////////////////////////////////////
 
@@ -56,12 +61,14 @@ const PokemonsList = () => {
             );
           })}
         </Container>
-        <button
-          style={{ width: "100px", marginBottom: "20px" }}
-          onClick={() => setPage(page + 51)}
-        >
-          NEXT
-        </button>
+        {loadPokemonsButtonVisibility && (
+          <button
+            style={{ width: "100px", marginBottom: "20px" }}
+            onClick={loadMorePokemons}
+          >
+            NEXT
+          </button>
+        )}
       </Container>
     </ThemeProvider>
   );

@@ -21,7 +21,7 @@ const style = {
   p: 4,
 };
 
-export default function PokemonDetails() {
+export default function PokemonData() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
