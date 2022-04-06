@@ -9,7 +9,7 @@ import axios from "axios";
 ///////////////////////////////////////////////
 const PokemonsList = () => {
   const classes = useStyles();
-  const [page, setPage] = useState(50);
+  const [page, setPage] = useState(51);
   async function fetchPokemons({ queryKey }) {
     const { data } = await axios.get(
       "https://pokeapi.co/api/v2/pokemon?limit=" + queryKey[1] + "&offset=0"
@@ -36,23 +36,32 @@ const PokemonsList = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container
-        className={classes.pokemonsListContainer}
-        sx={theme.custom.pokemonsListContainer.sx}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        {data.results?.map((data, i) => {
-          let pokemonName = data.name;
-          let pokemonUrl = data.url;
-          let pokemonNumber = i + 1;
-          return (
-            <PokemonsNamesAndNumbers
-              key={pokemonNumber}
-              pokemonName={pokemonName}
-              pokemonNumber={pokemonNumber}
-              pokemonUrl={pokemonUrl}
-            />
-          );
-        })}
-        <button onClick={() => setPage(page + 50)}>next</button>
+        <Container
+          className={classes.pokemonsListContainer}
+          sx={theme.custom.pokemonsListContainer.sx}
+        >
+          {data.results?.map((data, i) => {
+            let pokemonName = data.name;
+            let pokemonUrl = data.url;
+            let pokemonNumber = i + 1;
+            return (
+              <PokemonsNamesAndNumbers
+                key={pokemonNumber}
+                pokemonName={pokemonName}
+                pokemonNumber={pokemonNumber}
+                pokemonUrl={pokemonUrl}
+              />
+            );
+          })}
+        </Container>
+        <button
+          style={{ width: "100px", marginBottom: "20px" }}
+          onClick={() => setPage(page + 51)}
+        >
+          NEXT
+        </button>
       </Container>
     </ThemeProvider>
   );

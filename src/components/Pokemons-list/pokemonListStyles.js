@@ -4,7 +4,7 @@ import { createTheme } from "@mui/material/styles";
 export const useStyles = makeStyles(() => ({
   pokemonsListContainer: {
     height: "100%",
-    marginTop: "20px",
+    marginTop: "40px",
   },
 }));
 

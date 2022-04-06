@@ -28,17 +28,27 @@ export default function PokemonsNamesAndNumbers({
   if (isError) {
     return <div>Error! {error.message}</div>;
   }
+  ///////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////
 
   return (
-    <Card sx={{ maxWidth: 345, minWidth: 300 }}>
+    <Card
+      style={{ marginBottom: "30px", width: "250px" }}
+      sx={{ maxWidth: 345, minWidth: 200 }}
+    >
       {data?.map((info, i) => {
         if (pokemonName === info.name) {
           return (
-            <Link key={i} to={"/pokemon/" + info.name}>
+            <Link
+              key={i}
+              to={"/pokemon/" + info.name}
+              params={{ pokemonName: info.name }}
+            >
               <CardMedia
+                style={{ objectFit: "contain" }}
                 component="img"
                 height="140"
-                image={info.sprites.front_default}
+                image={info.sprites.other.dream_world.front_default}
                 alt="green iguana"
               />
             </Link>
@@ -46,7 +56,8 @@ export default function PokemonsNamesAndNumbers({
         }
         return "she";
       })}
-      <CardContent>
+
+      <CardContent sx={{ display: "flex" }}>
         <Typography data-user="123" gutterBottom variant="h5" component="div">
           {pokemonName}
         </Typography>
