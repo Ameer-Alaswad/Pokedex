@@ -87,12 +87,12 @@ export default function PokemonData() {
       keepPreviousData: true,
     }
   );
+  //////////////////////////////////////////
+  //////////////////////////////////////////
   let firstPokemonEvolutionName =
     pokemonEvolutionChain_data?.[0]?.chain.species.name;
   let secondPokemonEvolutionName;
-  //////////////////////////////////////////
-  //////////////////////////////////////////
-  const checkingIfPokemonHasFirstEvolotion = () => {
+  const checkingIfPokemonHasSecondEvolotion = () => {
     if (pokemonEvolutionChain_data?.[0]?.chain.evolves_to.length === 0) {
       thereIsSecondEvolution = false;
     } else {
@@ -101,11 +101,11 @@ export default function PokemonData() {
         pokemonEvolutionChain_data?.[0]?.chain.evolves_to?.[0]?.species.name;
     }
   };
-  checkingIfPokemonHasFirstEvolotion();
+  checkingIfPokemonHasSecondEvolotion();
   ////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////
   let thirdPokemonEvolutionName;
-  const checkingIfPokemonHasFirstOrSecondEvoluton = () => {
+  const checkingIfPokemonHasSecondOrThirdEvoluton = () => {
     if (
       pokemonEvolutionChain_data?.[0]?.chain.evolves_to.length === 0 ||
       pokemonEvolutionChain_data?.[0]?.chain.evolves_to?.[0]?.evolves_to
@@ -119,7 +119,7 @@ export default function PokemonData() {
           ?.species.name;
     }
   };
-  checkingIfPokemonHasFirstOrSecondEvoluton();
+  checkingIfPokemonHasSecondOrThirdEvoluton();
 
   ////////////////////////////////////////////////////////////////
   //feches first pokemon's evolution image
@@ -199,14 +199,22 @@ export default function PokemonData() {
   const thirdPokemonEvolutionImage =
     thirdPokemonEvolutionImageFetch_data?.[0]?.sprites?.other?.dream_world
       .front_default;
-  let images = [
+  let allEvolutionImages = [
     firstPokemonEvolutionImage,
     secondPokemonEvolutionImage,
     thirdPokemonEvolutionImage,
   ];
-  const newImages = images.filter((image) => {
-    return image !== undefined;
-  });
+  //////////////////////////////////////////////
+  ///////////////////////////////////////////////
+  //////////////////////////////////////////
+  const pokemonsImagesFilteredFromUndefinedGenerator = (allEvolutionImages) => {
+    return allEvolutionImages.filter((allEvolutionImages) => {
+      return allEvolutionImages !== undefined;
+    });
+  };
+  const newImages =
+    pokemonsImagesFilteredFromUndefinedGenerator(allEvolutionImages);
+
   if (isLoading) return <div> Loading...</div>;
   ///////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
