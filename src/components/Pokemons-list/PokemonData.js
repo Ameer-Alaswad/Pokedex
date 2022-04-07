@@ -22,6 +22,8 @@ const style = {
 };
 
 export default function PokemonData() {
+  let thereIsThirdEvolution = false;
+  let thereIsSecondEvolution = false;
   const { id } = useParams();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
@@ -63,7 +65,7 @@ export default function PokemonData() {
     error: pokemonSpecies_error,
     isError: pokemonSpecies_isError,
     isLoading: pokemonSpecies_isLoading,
-  } = useQuery(["posts", data?.[0].id], fetchPokemonSpecies, {
+  } = useQuery(["posts", data?.[0]?.id], fetchPokemonSpecies, {
     keepPreviousData: true,
   });
   /////////////////////////////////////////////////////////////////////
@@ -79,19 +81,45 @@ export default function PokemonData() {
     isError: pokemonEvolutionChain_isError,
     isLoading: pokemonEvolutionChain_isLoading,
   } = useQuery(
-    ["posts", pokemonSpecies_data?.[0].evolution_chain.url],
+    ["posts", pokemonSpecies_data?.[0]?.evolution_chain.url],
     fetchPokemonEvolutionsChain,
     {
       keepPreviousData: true,
     }
   );
-  const firstPokemonEvolutionName =
-    pokemonEvolutionChain_data?.[0].chain.species.name;
-  const secondPokemonEvolutionName =
-    pokemonEvolutionChain_data?.[0].chain.evolves_to?.[0].species.name;
-  const thirdPokemonEvolutionName =
-    pokemonEvolutionChain_data?.[0].chain.evolves_to?.[0].evolves_to?.[0]
-      .species.name;
+  let firstPokemonEvolutionName =
+    pokemonEvolutionChain_data?.[0]?.chain.species.name;
+  let secondPokemonEvolutionName;
+  //////////////////////////////////////////
+  //////////////////////////////////////////
+  const checkingIfPokemonHasFirstEvolotion = () => {
+    if (pokemonEvolutionChain_data?.[0]?.chain.evolves_to.length === 0) {
+      thereIsSecondEvolution = false;
+    } else {
+      thereIsSecondEvolution = true;
+      secondPokemonEvolutionName =
+        pokemonEvolutionChain_data?.[0]?.chain.evolves_to?.[0]?.species.name;
+    }
+  };
+  checkingIfPokemonHasFirstEvolotion();
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  let thirdPokemonEvolutionName;
+  const checkingIfPokemonHasFirstOrSecondEvoluton = () => {
+    if (
+      pokemonEvolutionChain_data?.[0]?.chain.evolves_to.length === 0 ||
+      pokemonEvolutionChain_data?.[0]?.chain.evolves_to?.[0]?.evolves_to
+        .length === 0
+    ) {
+      thereIsThirdEvolution = false;
+    } else {
+      thereIsThirdEvolution = true;
+      thirdPokemonEvolutionName =
+        pokemonEvolutionChain_data?.[0]?.chain.evolves_to?.[0]?.evolves_to?.[0]
+          ?.species.name;
+    }
+  };
+  checkingIfPokemonHasFirstOrSecondEvoluton();
 
   ////////////////////////////////////////////////////////////////
   //feches first pokemon's evolution image
@@ -133,6 +161,8 @@ export default function PokemonData() {
   } = useQuery(
     ["posts", secondPokemonEvolutionName],
     fetchSecondPokemonEvolutionImage,
+    { enabled: thereIsSecondEvolution },
+
     {
       keepPreviousData: true,
     }
@@ -155,22 +185,29 @@ export default function PokemonData() {
   } = useQuery(
     ["posts", thirdPokemonEvolutionName],
     fetchThirdPokemonEvolutionImage,
+    { enabled: thereIsThirdEvolution },
     {
       keepPreviousData: true,
     }
   );
   const firstPokemonEvolutionImage =
-    firstPokemonEvolutionImageFetch_data?.[0].sprites.other.dream_world
+    firstPokemonEvolutionImageFetch_data?.[0]?.sprites?.other?.dream_world
       .front_default;
   const secondPokemonEvolutionImage =
-    secondPokemonEvolutionImageFetch_data?.[0].sprites.other.dream_world
+    secondPokemonEvolutionImageFetch_data?.[0]?.sprites?.other?.dream_world
       .front_default;
   const thirdPokemonEvolutionImage =
-    thirdPokemonEvolutionImageFetch_data?.[0].sprites.other.dream_world
+    thirdPokemonEvolutionImageFetch_data?.[0]?.sprites?.other?.dream_world
       .front_default;
-
+  let images = [
+    firstPokemonEvolutionImage,
+    secondPokemonEvolutionImage,
+    thirdPokemonEvolutionImage,
+  ];
+  const newImages = images.filter((image) => {
+    return image !== undefined;
+  });
   if (isLoading) return <div> Loading...</div>;
-  if (isError) return <div>Error! {error.message}</div>;
   ///////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   if (pokemonSpecies_isLoading) return <div> Loading...</div>;
@@ -188,14 +225,6 @@ export default function PokemonData() {
     return <div>Error! {firstPokemonEvolutionImageFetch_error.message}</div>;
   ///////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
-  if (secondPokemonEvolutionImageFetch_isLoading) return <div> Loading...</div>;
-  if (secondPokemonEvolutionImageFetch_isError)
-    return <div>Error! {secondPokemonEvolutionImageFetch_error.message}</div>;
-  /////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////
-  if (thirdPokemonEvolutionImageFetch_isLoading) return <div> Loading...</div>;
-  if (thirdPokemonEvolutionImageFetch_isError)
-    return <div>Error! {thirdPokemonEvolutionImageFetch_error.message}</div>;
 
   return (
     <div>
@@ -258,19 +287,22 @@ export default function PokemonData() {
               evolution
             </Typography>
             <Box>
-              <CardMedia
-                style={{ objectFit: "contain" }}
-                component="img"
-                height="140"
-                image={firstPokemonEvolutionImage}
-                alt="green iguana"
-              />
+              {newImages.length !== 1 && (
+                <CardMedia
+                  style={{ objectFit: "contain" }}
+                  component="img"
+                  height="140"
+                  image={newImages[0]}
+                  alt="green iguana"
+                />
+              )}
+
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 {firstPokemonEvolutionName}
               </Typography>
             </Box>
             <Box>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              {secondPokemonEvolutionName && (
                 <CardMedia
                   style={{ objectFit: "contain" }}
                   component="img"
@@ -278,11 +310,13 @@ export default function PokemonData() {
                   image={secondPokemonEvolutionImage}
                   alt="green iguana"
                 />
+              )}
+              <Typography id="modal-modal-title" variant="h6" component="h2">
                 {secondPokemonEvolutionName}
               </Typography>
             </Box>
             <Box>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              {thirdPokemonEvolutionName && (
                 <CardMedia
                   style={{ objectFit: "contain" }}
                   component="img"
@@ -290,6 +324,8 @@ export default function PokemonData() {
                   image={thirdPokemonEvolutionImage}
                   alt="green iguana"
                 />
+              )}
+              <Typography id="modal-modal-title" variant="h6" component="h2">
                 {thirdPokemonEvolutionName}
               </Typography>{" "}
             </Box>

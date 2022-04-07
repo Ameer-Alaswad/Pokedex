@@ -9,7 +9,7 @@ import axios from "axios";
 ///////////////////////////////////////////////
 const PokemonsList = () => {
   const classes = useStyles();
-  const [pokemonsDisplayed, setPokemonsDisplayed] = useState(25);
+  const [pokemonsDisplayed, setPokemonsDisplayed] = useState(26);
   const [loadPokemonsButtonVisibility, setLoadPokemonsButtonVisibility] =
     useState(true);
   async function fetchPokemons({ queryKey }) {
