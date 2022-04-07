@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PokemonsNamesAndNumbers from "./PokemonsNamesAndNumbers";
 import Container from "@mui/material/Container";
-import { useStyles, theme } from "./pokemonListStyles";
+import { useStyles, theme } from "../styles/pokemonListStyles";
 import { ThemeProvider } from "@mui/material/styles";
 import { useQuery } from "react-query";
 import axios from "axios";
