@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PokemonsNamesAndNumbers from "./PokemonsNamesAndNumbers";
 import Container from "@mui/material/Container";
-import { useStyles, theme } from "./pokemonListStyles";
+import { useStyles, theme } from "../styles/pokemonListStyles";
 import { ThemeProvider } from "@mui/material/styles";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -41,13 +41,14 @@ const PokemonsList = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container
+        style={{ backgroundColor: "#424242", marginTop: "50px" }}
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         <Container
           className={classes.pokemonsListContainer}
           sx={theme.custom.pokemonsListContainer.sx}
         >
-          {data.results?.map((data, i) => {
+          {data?.results?.map((data, i) => {
             let pokemonName = data.name;
             let pokemonUrl = data.url;
             let pokemonNumber = i + 1;
@@ -62,6 +63,7 @@ const PokemonsList = () => {
           })}
         </Container>
         {loadPokemonsButtonVisibility && (
+          //handle
           <button
             style={{ width: "100px", marginBottom: "20px" }}
             onClick={loadMorePokemons}
