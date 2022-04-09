@@ -6,7 +6,6 @@ import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import CardMedia from "@mui/material/CardMedia";
 import { useStyles, theme } from "../styles/pokemonDataStyles";
 import { ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
