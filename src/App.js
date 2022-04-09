@@ -1,7 +1,7 @@
 import "./App.css";
 import PokemonsList from "./components/Pokemons-list/PokemonsList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PokemonData from "./components/Pokemons-list/PokemonData";
+import PokemonData from "./components/pokemon-data/PokemonData";
 
 function App() {
   return (

@@ -6,9 +6,12 @@ import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import { useStyles, theme } from "../styles/pokemonDataStyles";
+import { useStyles, theme } from "./pokemonDataStyles";
 import { ThemeProvider } from "@mui/material/styles";
+import PokemonEvolutions from "./pokemon-data-components/PokemonEvolutions";
+import PokemonTpyes from "./pokemon-data-components/PokemonType";
 import axios from "axios";
+import PokemonStatsAndImageAndName from "./pokemon-data-components/PokemonStatsAndImageAndName";
 
 const style = {
   position: "absolute",
@@ -208,22 +211,6 @@ export default function PokemonData() {
   const thirdPokemonEvolutionImage =
     thirdPokemonEvolutionImageFetch_data?.[0]?.sprites?.other?.dream_world
       .front_default;
-  let allEvolutionImages = [
-    firstPokemonEvolutionImage,
-    secondPokemonEvolutionImage,
-    thirdPokemonEvolutionImage,
-  ];
-
-  //////////////////////////////////////////////
-  ///////////////////////////////////////////////
-  //////////////////////////////////////////
-  const pokemonsImagesFilteredFromUndefinedGenerator = (allEvolutionImages) => {
-    return allEvolutionImages.filter((allEvolutionImages) => {
-      return allEvolutionImages !== undefined;
-    });
-  };
-  const newImages =
-    pokemonsImagesFilteredFromUndefinedGenerator(allEvolutionImages);
 
   if (isLoading) return <div> Loading...</div>;
   ///////////////////////////////////////////////////////////////
@@ -260,169 +247,19 @@ export default function PokemonData() {
               style={{ height: "100%" }}
               sx={theme.custom.pokemonsDataContainer.sx}
             >
-              <div className={classes.pokemonNameAndStatsComponent}>
-                {/* ///////////// stats/////////////// */}
-                <div className={classes.pokemonStatsHeadlineAndStatsContainer}>
-                  <Typography
-                    style={{ textAlign: "center" }}
-                    id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
-                  >
-                    <strong>Stats</strong>
-                  </Typography>
-                  <Box
-                    sx={theme.custom.pokemonStatsContainer.sx}
-                    style={theme.custom.pokemonStatsContainer}
-                  >
-                    {data?.[0]?.stats.map((stat, i) => {
-                      return (
-                        <div
-                          className={
-                            classes.containerOfPeragraphsOfPokemonStats
-                          }
-                          key={i}
-                          id="modal-modal-title"
-                          variant="h6"
-                          component="h2"
-                        >
-                          <h1 className={classes.typePeragraphInpokemonStats}>
-                            {stat.stat.name.toUpperCase()} :
-                          </h1>
-                          <span className={classes.statsNumbersPeragraph}>
-                            {stat.base_stat}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </Box>
-                </div>
-
-                <Box
-                  style={{ width: "250px" }}
-                  sx={theme.custom.pokemonImageAndName.sx}
-                >
-                  <h3 className={classes.pokemonName}>{id?.toUpperCase()}</h3>
-                  <div className={classes.pokemonImageContainer}>
-                    <img
-                      className={classes.pokemonImage}
-                      src={data?.[0].sprites.other.dream_world.front_default}
-                      alt="green iguana"
-                    />
-                  </div>
-                </Box>
-              </div>
-
+              {/* ///////////// stats, image and name/////////////// */}
+              <PokemonStatsAndImageAndName data={data} id={id} />
               {/* ///////////// types/////////////// */}
-              <Box sx={{ display: "flex" }}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  <strong>Type:</strong>
-                </Typography>
-                {data?.[0].types.map((type, i) => {
-                  return (
-                    <Typography
-                      style={theme.custom.typesTypography}
-                      key={i}
-                      variant="h6"
-                      component="h2"
-                    >
-                      {type.type.name}
-                    </Typography>
-                  );
-                })}
-              </Box>
+              <PokemonTpyes data={data} />
               {/* ///////////// evolution/////////////// */}
-              {newImages.length !== 1 && (
-                <div>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
-                  >
-                    <strong>Evolutions</strong>
-                  </Typography>
-                  <div className={classes.evolutionImagesAndNamesContainer}>
-                    <Box
-                      sx={
-                        theme.custom.pokemonsEvolutionsImageAndNameContainers.sx
-                      }
-                    >
-                      {newImages.length !== 1 && (
-                        <div className={classes.EvolutionImageContainer}>
-                          <img
-                            className={classes.evolutionImages}
-                            component="img"
-                            height="140"
-                            src={newImages[0]}
-                            alt="green iguana"
-                          />
-                        </div>
-                      )}
-
-                      <Typography
-                        style={theme.custom.firstEvolutionsName}
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                      >
-                        <strong>{firstPokemonEvolutionName}</strong>
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={
-                        theme.custom.pokemonsEvolutionsImageAndNameContainers.sx
-                      }
-                    >
-                      {secondPokemonEvolutionName && (
-                        <div className={classes.EvolutionImageContainer}>
-                          <img
-                            className={classes.evolutionImages}
-                            component="img"
-                            height="140"
-                            width="300px"
-                            src={secondPokemonEvolutionImage}
-                            alt="green iguana"
-                          />
-                        </div>
-                      )}
-                      <Typography
-                        style={theme.custom.secondEvolutionsName}
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                      >
-                        <strong>{secondPokemonEvolutionName}</strong>
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={
-                        theme.custom.pokemonsEvolutionsImageAndNameContainers.sx
-                      }
-                    >
-                      {thirdPokemonEvolutionName && (
-                        <div className={classes.EvolutionImageContainer}>
-                          <img
-                            className={classes.evolutionImages}
-                            component="img"
-                            height="140"
-                            width="300px"
-                            src={thirdPokemonEvolutionImage}
-                            alt="green iguana"
-                          />
-                        </div>
-                      )}
-                      <Typography
-                        style={theme.custom.thirdEvolutionsName}
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                      >
-                        <strong> {thirdPokemonEvolutionName}</strong>
-                      </Typography>{" "}
-                    </Box>
-                  </div>
-                </div>
-              )}
+              <PokemonEvolutions
+                firstPokemonEvolutionImage={firstPokemonEvolutionImage}
+                firstPokemonEvolutionName={firstPokemonEvolutionName}
+                secondPokemonEvolutionName={secondPokemonEvolutionName}
+                secondPokemonEvolutionImage={secondPokemonEvolutionImage}
+                thirdPokemonEvolutionName={thirdPokemonEvolutionName}
+                thirdPokemonEvolutionImage={thirdPokemonEvolutionImage}
+              />
             </Box>
           </Box>
         </Modal>
