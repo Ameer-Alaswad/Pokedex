@@ -33,7 +33,12 @@ export default function PokemonsNamesAndNumbers({
 
   return (
     <Card
-      style={{ marginBottom: "30px", width: "250px" }}
+      style={{
+        marginBottom: "30px",
+        width: "250px",
+        height: "300px",
+        borderRadius: "30px",
+      }}
       sx={{ maxWidth: 345, minWidth: 200 }}
     >
       {data?.map((info, i) => {
@@ -45,7 +50,13 @@ export default function PokemonsNamesAndNumbers({
               params={{ pokemonName: info.name }}
             >
               <CardMedia
-                style={{ objectFit: "contain" }}
+                style={{
+                  objectFit: "contain",
+                  margin: "0 auto",
+                  marginTop: "20px",
+                  height: "210px",
+                  width: "240px",
+                }}
                 component="img"
                 height="140"
                 image={info.sprites.other.dream_world.front_default}
@@ -57,9 +68,15 @@ export default function PokemonsNamesAndNumbers({
         return "she";
       })}
 
-      <CardContent sx={{ display: "flex" }}>
-        <Typography data-user="123" gutterBottom variant="h5" component="div">
-          {pokemonName}
+      <CardContent style={{ marginTop: "15px" }} sx={{ display: "flex" }}>
+        <Typography
+          style={{ fontFamily: "'Century Gothic', sans-serif" }}
+          data-user="123"
+          gutterBottom
+          variant="h5"
+          component="div"
+        >
+          {pokemonName.toUpperCase()}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {pokemonNumber}

@@ -41,13 +41,14 @@ const PokemonsList = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container
+        style={{ backgroundColor: "#424242", marginTop: "50px" }}
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         <Container
           className={classes.pokemonsListContainer}
           sx={theme.custom.pokemonsListContainer.sx}
         >
-          {data.results?.map((data, i) => {
+          {data?.results?.map((data, i) => {
             let pokemonName = data.name;
             let pokemonUrl = data.url;
             let pokemonNumber = i + 1;
@@ -62,6 +63,7 @@ const PokemonsList = () => {
           })}
         </Container>
         {loadPokemonsButtonVisibility && (
+          //handle
           <button
             style={{ width: "100px", marginBottom: "20px" }}
             onClick={loadMorePokemons}
