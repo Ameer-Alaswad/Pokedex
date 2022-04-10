@@ -5,16 +5,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "react-query";
 import { theme } from "./pokemonCardDataStyles";
+import { fetchImages } from "../../fetchData";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 export default function PokemonCardData({ pokemonName, pokemonNumber }) {
-  async function fetchImages({ queryKey }) {
-    const { data } = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon/" + queryKey[1]
-    );
-    return [data];
-  }
   const { data, error, isError, isLoading } = useQuery(
     ["posts", pokemonName],
     fetchImages,

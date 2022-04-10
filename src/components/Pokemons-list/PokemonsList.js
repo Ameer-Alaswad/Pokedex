@@ -6,19 +6,13 @@ import { useQuery } from "react-query";
 import LoadMoreButton from "./LoadMoreButton";
 import Footer from "../Footer";
 import PokemonCardData from "./pokemon-card-data/PokemonCardData";
-import axios from "axios";
-
+import { fetchPokemons } from "../fetchData";
 const PokemonsList = () => {
   const classes = useStyles();
   const [pokemonsDisplayed, setPokemonsDisplayed] = useState(24);
   const [loadPokemonsButtonVisibility, setLoadPokemonsButtonVisibility] =
     useState(true);
-  async function fetchPokemons({ queryKey }) {
-    const { data } = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon?limit=" + queryKey[1] + "&offset=0"
-    );
-    return data;
-  }
+
   const { data, error, isError, isLoading } = useQuery(
     ["posts", pokemonsDisplayed],
     fetchPokemons,

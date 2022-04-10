@@ -91,24 +91,18 @@ export default function PokemonData() {
   ////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////
   let thirdPokemonEvolutionName;
-  // const checkingIfPokemonHasSecondOrThirdEvoluton = () => {
   if (
     pokemonEvolutionChain_data?.[0]?.chain.evolves_to.length === 0 ||
     pokemonEvolutionChain_data?.[0]?.chain.evolves_to?.[0]?.evolves_to
       .length === 0
   ) {
-    // setThereIsThirdEvolution(() => false);
     // thereIsThirdEvolution = false;
   } else {
-    // setThereIsThirdEvolution(() => true);
     thereIsThirdEvolution = true;
-    // console.log("second");
     thirdPokemonEvolutionName =
       pokemonEvolutionChain_data?.[0]?.chain.evolves_to?.[0]?.evolves_to?.[0]
         ?.species.name;
   }
-  // };
-  // checkingIfPokemonHasSecondOrThirdEvoluton();
 
   ////////////////////////////////////////////////////////////////
   //feches first pokemon's evolution image
