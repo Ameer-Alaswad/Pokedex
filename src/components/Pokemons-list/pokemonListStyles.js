@@ -18,5 +18,10 @@ export const theme = createTheme({
         flexWrap: "wrap",
       },
     },
+    containerOfPokemonsListContainer: {
+      sx: { display: "flex", flexDirection: "column", alignItems: "center" },
+      backgroundColor: "#424242",
+      marginTop: "50px",
+    },
   },
 });

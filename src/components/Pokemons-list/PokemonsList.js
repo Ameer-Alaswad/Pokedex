@@ -1,13 +1,13 @@
 import { useState } from "react";
 import PokemonsNamesAndNumbers from "./PokemonsNamesAndNumbers";
 import Container from "@mui/material/Container";
-import { useStyles, theme } from "../styles/pokemonListStyles";
+import { useStyles, theme } from "./pokemonListStyles";
 import { ThemeProvider } from "@mui/material/styles";
 import { useQuery } from "react-query";
 import LoadMoreButton from "./LoadMoreButton";
+import Footer from "../Footer";
 import axios from "axios";
-//////////////////////////////////////////////
-///////////////////////////////////////////////
+
 const PokemonsList = () => {
   const classes = useStyles();
   const [pokemonsDisplayed, setPokemonsDisplayed] = useState(24);
@@ -28,22 +28,18 @@ const PokemonsList = () => {
   );
 
   if (isLoading) return <div>Loading...</div>;
-
   if (isError) return <div>Error! {error.message}</div>;
-
   const handleLoadMorePokemons = () => {
     data.next === null
       ? setLoadPokemonsButtonVisibility(false)
       : setPokemonsDisplayed(pokemonsDisplayed + 24);
   };
-  /////////////////////////////////////////////
-  ///////////////////////////////////////////
 
   return (
     <ThemeProvider theme={theme}>
       <Container
-        style={{ backgroundColor: "#424242", marginTop: "50px" }}
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        style={theme.custom.containerOfPokemonsListContainer}
+        sx={theme.custom.containerOfPokemonsListContainer.sx}
       >
         <Container
           className={classes.pokemonsListContainer}
@@ -67,6 +63,7 @@ const PokemonsList = () => {
           <LoadMoreButton handleLoadMorePokemons={handleLoadMorePokemons} />
         )}
       </Container>
+      <Footer />
     </ThemeProvider>
   );
 };
