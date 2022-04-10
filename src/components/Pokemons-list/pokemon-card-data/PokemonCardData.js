@@ -4,13 +4,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "react-query";
+import { theme } from "./pokemonCardDataStyles";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function PokemonsNamesAndNumbers({
-  pokemonName,
-  pokemonNumber,
-}) {
+export default function PokemonCardData({ pokemonName, pokemonNumber }) {
   async function fetchImages({ queryKey }) {
     const { data } = await axios.get(
       "https://pokeapi.co/api/v2/pokemon/" + queryKey[1]
@@ -28,20 +26,15 @@ export default function PokemonsNamesAndNumbers({
   if (isError) {
     return <div>Error! {error.message}</div>;
   }
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   ///////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////
-
   return (
-    <Card
-      style={{
-        marginBottom: "30px",
-        width: "250px",
-        height: "300px",
-        borderRadius: "30px",
-      }}
-      sx={{ maxWidth: 345, minWidth: 200 }}
-    >
+    <Card style={theme.custom.cardContainer} sx={theme.custom.cardContainer.sx}>
       {data?.map((info, i) => {
+        const pokemonImage = info?.sprites.other.dream_world.front_default;
         if (pokemonName === info.name) {
           return (
             <Link
@@ -50,25 +43,22 @@ export default function PokemonsNamesAndNumbers({
               params={{ pokemonName: info.name }}
             >
               <CardMedia
-                style={{
-                  objectFit: "contain",
-                  margin: "0 auto",
-                  marginTop: "20px",
-                  height: "210px",
-                  width: "240px",
-                }}
+                style={theme.custom.pokemonImage}
                 component="img"
                 height="140"
-                image={info.sprites.other.dream_world.front_default}
+                image={pokemonImage}
                 alt="green iguana"
               />
             </Link>
           );
         }
-        return "she";
+        return null;
       })}
 
-      <CardContent style={{ marginTop: "15px" }} sx={{ display: "flex" }}>
+      <CardContent
+        style={theme.custom.pokemonNameAndNumberContainer}
+        sx={theme.custom.pokemonNameAndNumberContainer.sx}
+      >
         <Typography
           style={{ fontFamily: "'Century Gothic', sans-serif" }}
           data-user="123"

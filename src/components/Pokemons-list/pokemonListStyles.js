@@ -1,5 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
+import { TUNDORA } from "../../default-colors/colors";
 
 export const useStyles = makeStyles(() => ({
   pokemonsListContainer: {
@@ -20,7 +21,7 @@ export const theme = createTheme({
     },
     containerOfPokemonsListContainer: {
       sx: { display: "flex", flexDirection: "column", alignItems: "center" },
-      backgroundColor: "#424242",
+      backgroundColor: TUNDORA,
       marginTop: "50px",
     },
   },

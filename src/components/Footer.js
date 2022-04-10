@@ -1,8 +1,9 @@
+import { BOSTON_BLUE, WHITE_SOLID } from "../default-colors/colors";
 import * as React from "react";
 const containerOfLinksContainer = {
   height: "50px",
-  backgroundColor: "#4592c4",
-  color: "white",
+  backgroundColor: BOSTON_BLUE,
+  color: WHITE_SOLID,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import PokemonsNamesAndNumbers from "./PokemonsNamesAndNumbers";
 import Container from "@mui/material/Container";
 import { useStyles, theme } from "./pokemonListStyles";
 import { ThemeProvider } from "@mui/material/styles";
 import { useQuery } from "react-query";
 import LoadMoreButton from "./LoadMoreButton";
 import Footer from "../Footer";
+import PokemonCardData from "./pokemon-card-data/PokemonCardData";
 import axios from "axios";
 
 const PokemonsList = () => {
@@ -50,7 +50,7 @@ const PokemonsList = () => {
             let pokemonUrl = data.url;
             let pokemonNumber = i + 1;
             return (
-              <PokemonsNamesAndNumbers
+              <PokemonCardData
                 key={pokemonNumber}
                 pokemonName={pokemonName}
                 pokemonNumber={pokemonNumber}
