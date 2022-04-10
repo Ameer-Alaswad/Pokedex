@@ -1,6 +1,25 @@
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 
+export const modalContainerResponsive = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "70%",
+  height: "55%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  "@media (max-width: 700px)": {
+    height: "80%",
+  },
+  "@media (max-width: 688px)": {
+    height: "100%",
+  },
+};
+
 export const useStyles = makeStyles(() => ({
   pokemonNameAndStatsComponent: {
     display: "flex",

@@ -17,14 +17,14 @@ const PokemonEvolutions = ({
     secondPokemonEvolutionImage,
     thirdPokemonEvolutionImage,
   ];
+  const getPokemonsImages = (allEvolutionImages) => {
+    // gets all pokemons images and without undefined values.
 
-  const pokemonsImagesFilteredFromUndefinedGenerator = (allEvolutionImages) => {
-    return allEvolutionImages.filter((allEvolutionImages) => {
-      return allEvolutionImages !== undefined;
-    });
+    return allEvolutionImages.filter(
+      (allEvolutionImages) => allEvolutionImages !== undefined
+    );
   };
-  const newImages =
-    pokemonsImagesFilteredFromUndefinedGenerator(allEvolutionImages);
+  const newImages = getPokemonsImages(allEvolutionImages);
   const classes = useStyles();
   return (
     <div>
