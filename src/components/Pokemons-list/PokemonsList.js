@@ -4,12 +4,13 @@ import Container from "@mui/material/Container";
 import { useStyles, theme } from "../styles/pokemonListStyles";
 import { ThemeProvider } from "@mui/material/styles";
 import { useQuery } from "react-query";
+import LoadMoreButton from "./LoadMoreButton";
 import axios from "axios";
 //////////////////////////////////////////////
 ///////////////////////////////////////////////
 const PokemonsList = () => {
   const classes = useStyles();
-  const [pokemonsDisplayed, setPokemonsDisplayed] = useState(26);
+  const [pokemonsDisplayed, setPokemonsDisplayed] = useState(24);
   const [loadPokemonsButtonVisibility, setLoadPokemonsButtonVisibility] =
     useState(true);
   async function fetchPokemons({ queryKey }) {
@@ -30,10 +31,10 @@ const PokemonsList = () => {
 
   if (isError) return <div>Error! {error.message}</div>;
 
-  const loadMorePokemons = () => {
+  const handleLoadMorePokemons = () => {
     data.next === null
       ? setLoadPokemonsButtonVisibility(false)
-      : setPokemonsDisplayed(pokemonsDisplayed + 25);
+      : setPokemonsDisplayed(pokemonsDisplayed + 24);
   };
   /////////////////////////////////////////////
   ///////////////////////////////////////////
@@ -63,13 +64,7 @@ const PokemonsList = () => {
           })}
         </Container>
         {loadPokemonsButtonVisibility && (
-          //handle
-          <button
-            style={{ width: "100px", marginBottom: "20px" }}
-            onClick={loadMorePokemons}
-          >
-            NEXT
-          </button>
+          <LoadMoreButton handleLoadMorePokemons={handleLoadMorePokemons} />
         )}
       </Container>
     </ThemeProvider>

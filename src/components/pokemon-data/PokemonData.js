@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -10,6 +10,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import PokemonEvolutions from "./pokemon-data-components/PokemonEvolutions";
 import PokemonTpyes from "./pokemon-data-components/PokemonType";
 import PokemonStatsAndImageAndName from "./pokemon-data-components/PokemonStatsAndImageAndName";
+import GoBackButton from "./pokemon-data-components/GobackButton";
 import {
   fetchFirstPokemonEvolutionImage,
   fetchPokemonDetails,
@@ -208,6 +209,7 @@ export default function PokemonData() {
               style={{ height: "100%" }}
               sx={theme.custom.pokemonsDataContainer.sx}
             >
+              <GoBackButton />
               {/* ///////////// stats, image and name/////////////// */}
               <PokemonStatsAndImageAndName data={data} id={id} />
               {/* ///////////// types/////////////// */}
