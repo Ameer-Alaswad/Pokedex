@@ -1,23 +1,18 @@
 import { useState } from "react";
-import PokemonsNamesAndNumbers from "./PokemonsNamesAndNumbers";
 import Container from "@mui/material/Container";
-import { useStyles, theme } from "../styles/pokemonListStyles";
+import { useStyles, theme } from "./pokemonListStyles";
 import { ThemeProvider } from "@mui/material/styles";
 import { useQuery } from "react-query";
-import axios from "axios";
-//////////////////////////////////////////////
-///////////////////////////////////////////////
+import LoadMoreButton from "./LoadMoreButton";
+import Footer from "../Footer";
+import PokemonCardData from "./pokemon-card-data/PokemonCardData";
+import { fetchPokemons } from "../fetchData";
 const PokemonsList = () => {
   const classes = useStyles();
-  const [pokemonsDisplayed, setPokemonsDisplayed] = useState(26);
+  const [pokemonsDisplayed, setPokemonsDisplayed] = useState(24);
   const [loadPokemonsButtonVisibility, setLoadPokemonsButtonVisibility] =
     useState(true);
-  async function fetchPokemons({ queryKey }) {
-    const { data } = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon?limit=" + queryKey[1] + "&offset=0"
-    );
-    return data;
-  }
+
   const { data, error, isError, isLoading } = useQuery(
     ["posts", pokemonsDisplayed],
     fetchPokemons,
@@ -27,22 +22,18 @@ const PokemonsList = () => {
   );
 
   if (isLoading) return <div>Loading...</div>;
-
   if (isError) return <div>Error! {error.message}</div>;
-
-  const loadMorePokemons = () => {
+  const handleLoadMorePokemons = () => {
     data.next === null
       ? setLoadPokemonsButtonVisibility(false)
-      : setPokemonsDisplayed(pokemonsDisplayed + 25);
+      : setPokemonsDisplayed(pokemonsDisplayed + 24);
   };
-  /////////////////////////////////////////////
-  ///////////////////////////////////////////
 
   return (
     <ThemeProvider theme={theme}>
       <Container
-        style={{ backgroundColor: "#424242", marginTop: "50px" }}
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        style={theme.custom.containerOfPokemonsListContainer}
+        sx={theme.custom.containerOfPokemonsListContainer.sx}
       >
         <Container
           className={classes.pokemonsListContainer}
@@ -53,7 +44,7 @@ const PokemonsList = () => {
             let pokemonUrl = data.url;
             let pokemonNumber = i + 1;
             return (
-              <PokemonsNamesAndNumbers
+              <PokemonCardData
                 key={pokemonNumber}
                 pokemonName={pokemonName}
                 pokemonNumber={pokemonNumber}
@@ -63,15 +54,10 @@ const PokemonsList = () => {
           })}
         </Container>
         {loadPokemonsButtonVisibility && (
-          //handle
-          <button
-            style={{ width: "100px", marginBottom: "20px" }}
-            onClick={loadMorePokemons}
-          >
-            NEXT
-          </button>
+          <LoadMoreButton handleLoadMorePokemons={handleLoadMorePokemons} />
         )}
       </Container>
+      <Footer />
     </ThemeProvider>
   );
 };

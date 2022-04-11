@@ -1,5 +1,31 @@
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
+import {
+  GRAY_CHATEAU,
+  CURIOUS_BLUE,
+  WHITE_SOLID,
+  BLACK_SOLID,
+  ORANGE_SOLID,
+} from "../../default-colors/colors";
+
+export const modalContainerResponsive = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "70%",
+  height: "55%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  "@media (max-width: 700px)": {
+    height: "80%",
+  },
+  "@media (max-width: 688px)": {
+    height: "100%",
+  },
+};
 
 export const useStyles = makeStyles(() => ({
   pokemonNameAndStatsComponent: {
@@ -16,7 +42,7 @@ export const useStyles = makeStyles(() => ({
   },
   pokemonImageContainer: {
     width: "230px",
-    backgroundColor: "#a4acaf",
+    backgroundColor: GRAY_CHATEAU,
     height: "250px",
     display: "flex",
     flexDirection: "column",
@@ -53,7 +79,7 @@ export const useStyles = makeStyles(() => ({
   },
   pokemonStatsHeadlineAndStatsContainer: {
     width: "420px",
-    backgroundColor: "#30a7d7",
+    backgroundColor: CURIOUS_BLUE,
     borderRadius: " 10% / 50%",
     height: "300px",
     "@media (max-width: 700px)": {
@@ -76,7 +102,7 @@ export const useStyles = makeStyles(() => ({
   },
   typePeragraphInpokemonStats: {
     fontSize: "20px",
-    backgroundColor: "white",
+    backgroundColor: WHITE_SOLID,
     height: "35px",
     marginRight: "5px",
     borderRadius: "50% 20% / 10% 40%",
@@ -89,8 +115,8 @@ export const useStyles = makeStyles(() => ({
   statsNumbersPeragraph: {
     fontSize: "20px",
     textAlign: "center",
-    backgroundColor: "black",
-    color: "white",
+    backgroundColor: BLACK_SOLID,
+    color: WHITE_SOLID,
     height: "35px",
     width: "35px",
     marginTop: "12px",
@@ -106,7 +132,7 @@ export const useStyles = makeStyles(() => ({
   },
   EvolutionImageContainer: {
     width: "150px",
-    backgroundColor: "#a4acaf",
+    backgroundColor: GRAY_CHATEAU,
     display: "flex",
     height: "185px",
     flexDirection: "column",
@@ -180,7 +206,7 @@ export const theme = createTheme({
     typesTypography: {
       marginLeft: "10px",
       fontSize: "20px",
-      backgroundColor: "orange",
+      backgroundColor: ORANGE_SOLID,
       width: "100px",
       textAlign: "center",
       height: "35px",
