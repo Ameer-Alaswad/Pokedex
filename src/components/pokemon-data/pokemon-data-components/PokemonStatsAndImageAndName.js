@@ -5,7 +5,7 @@ import { useStyles, theme } from "../pokemonDataStyles";
 
 const PokemonStatsAndImageAndName = ({ data, id }) => {
   const classes = useStyles();
-
+  const pokemonImage = data?.[0].sprites.other.dream_world.front_default;
   return (
     <div className={classes.pokemonNameAndStatsComponent}>
       {/* ///////////// stats, image and/////////////// */}
@@ -48,7 +48,7 @@ const PokemonStatsAndImageAndName = ({ data, id }) => {
         <div className={classes.pokemonImageContainer}>
           <img
             className={classes.pokemonImage}
-            src={data?.[0].sprites.other.dream_world.front_default}
+            src={pokemonImage}
             alt="green iguana"
           />
         </div>

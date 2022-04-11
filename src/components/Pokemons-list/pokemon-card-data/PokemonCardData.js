@@ -5,13 +5,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "react-query";
 import { theme } from "./pokemonCardDataStyles";
-import { fetchImages } from "../../fetchData";
+import { fetchPokemonData } from "../../fetchData";
 import { Link } from "react-router-dom";
 
 export default function PokemonCardData({ pokemonName, pokemonNumber }) {
   const { data, error, isError, isLoading } = useQuery(
     ["posts", pokemonName],
-    fetchImages,
+    fetchPokemonData,
     {
       keepPreviousData: true,
     }
@@ -49,10 +49,7 @@ export default function PokemonCardData({ pokemonName, pokemonNumber }) {
         return null;
       })}
 
-      <CardContent
-        style={theme.custom.pokemonNameAndNumberContainer}
-        sx={theme.custom.pokemonNameAndNumberContainer.sx}
-      >
+      <CardContent style={theme.custom.pokemonNameAndNumberContainer}>
         <Typography
           style={{ fontFamily: "'Century Gothic', sans-serif" }}
           data-user="123"
@@ -64,7 +61,6 @@ export default function PokemonCardData({ pokemonName, pokemonNumber }) {
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {pokemonNumber}
-          {}
         </Typography>
       </CardContent>
     </Card>

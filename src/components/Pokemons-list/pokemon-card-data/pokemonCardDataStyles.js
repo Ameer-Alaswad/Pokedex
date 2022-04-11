@@ -16,7 +16,6 @@ export const theme = createTheme({
       height: "210px",
       width: "240px",
     },
-    pokemonNameAndNumberContainer: { marginTop: "15px" },
-    sx: { display: "flex" },
+    pokemonNameAndNumberContainer: { marginTop: "15px", display: "flex" },
   },
 });
