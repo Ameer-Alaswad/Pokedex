@@ -10,7 +10,7 @@ export default function GoBackButton() {
       <Link to="/">
         <Button
           data-test-id="go back"
-          style={{ backgroundColor: MINE_SHAFT }}
+          style={{ backgroundColor: MINE_SHAFT, marginBottom: "13px" }}
           variant="contained"
         >
           Go back!
