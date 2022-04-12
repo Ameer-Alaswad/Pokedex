@@ -86,7 +86,7 @@ export default function usePokemonDataFetch() {
     }
   );
   ////////////////////////////////////////////////////////////////
-  //feches third pokemon's evolution image
+  //fetches third pokemon's evolution image
   /////////////////////////////////////////////////
 
   const { data: thirdPokemonEvolutionImageFetch_data } = useQuery(
