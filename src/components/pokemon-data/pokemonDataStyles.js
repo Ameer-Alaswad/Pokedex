@@ -90,7 +90,7 @@ export const useStyles = makeStyles(() => ({
       width: "220px",
     },
   },
-  containerOfPeragraphsOfPokemonStats: {
+  containerOfParagraphsOfPokemonStats: {
     width: "300px",
     display: "flex",
     height: "23px",
@@ -100,7 +100,7 @@ export const useStyles = makeStyles(() => ({
       justifyContent: "flex-start",
     },
   },
-  typePeragraphInpokemonStats: {
+  typeParagraphInPokemonStats: {
     fontSize: "20px",
     backgroundColor: WHITE_SOLID,
     height: "35px",
@@ -112,7 +112,7 @@ export const useStyles = makeStyles(() => ({
       height: "25px",
     },
   },
-  statsNumbersPeragraph: {
+  statsNumbersParagraph: {
     fontSize: "20px",
     textAlign: "center",
     backgroundColor: BLACK_SOLID,

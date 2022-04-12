@@ -2,12 +2,11 @@ import {
   POKEMON_URL,
   POKEMON_SPECIES,
   POKEMONS_URL_WITH_LIMIT,
-} from "../porject-urls/porjectUrls";
+} from "../project-urls/projectUrls";
 import axios from "axios";
 
 export async function fetchPokemonData({ queryKey }) {
   const { data } = await axios.get(POKEMON_URL + queryKey[1]);
-
   return [data];
 }
 
