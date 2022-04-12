@@ -8,7 +8,11 @@ export default function GoBackButton() {
   return (
     <Stack spacing={2} direction="row">
       <Link to="/">
-        <Button style={{ backgroundColor: MINE_SHAFT }} variant="contained">
+        <Button
+          data-test-id="go back"
+          style={{ backgroundColor: MINE_SHAFT }}
+          variant="contained"
+        >
           Go back!
         </Button>
       </Link>
