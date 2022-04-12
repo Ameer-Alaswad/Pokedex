@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { modalContainerResponsive, theme } from "./pokemonDataStyles";
 import { ThemeProvider } from "@mui/material/styles";
 import PokemonEvolutions from "./pokemon-data-components/PokemonEvolutions";
-import PokemonTpyes from "./pokemon-data-components/PokemonType";
+import PokemonTypes from "./pokemon-data-components/PokemonType";
 import PokemonStatsAndImageAndName from "./pokemon-data-components/PokemonStatsAndImageAndName";
 import GoBackButton from "./pokemon-data-components/GobackButton";
 
@@ -68,7 +68,7 @@ export default function PokemonData() {
               {/* ///////////// stats, image and name/////////////// */}
               <PokemonStatsAndImageAndName data={data} id={id} />
               {/* ///////////// types/////////////// */}
-              <PokemonTpyes data={data} />
+              <PokemonTypes data={data} />
               {/* ///////////// evolution/////////////// */}
               <PokemonEvolutions {...pokemonEvolutionData} />
             </Box>

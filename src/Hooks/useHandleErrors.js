@@ -1,7 +1,6 @@
 import usePokemonDataFetch from "./usePokemonDataFetch";
 
 export const useHandleErrors = () => {
-  let isError = false;
   const {
     pokemonSpecies_isError,
     firstPokemonEvolutionImageFetch_isError,
@@ -13,24 +12,17 @@ export const useHandleErrors = () => {
 
   let error;
   if (pokemonSpecies_isError) {
-    isError = true;
-    error = <div>Error!{pokemonSpecies_error.message} </div>;
+    error = <div>Error!{pokemonSpecies_error?.message} </div>;
   } else {
-    isError = false;
   }
 
   if (pokemonEvolutionChain_isError) {
-    isError = true;
-
-    return <div>Error! {pokemonEvolutionChain_error.message}</div>;
+    return <div>Error! {pokemonEvolutionChain_error?.message}</div>;
   } else {
-    isError = false;
   }
 
   if (firstPokemonEvolutionImageFetch_isError) {
-    isError = true;
-
-    return <div>Error! {firstPokemonEvolutionImageFetch_error.message}</div>;
+    return <div>Error! {firstPokemonEvolutionImageFetch_error?.message}</div>;
   }
   return { error };
 };

@@ -25,16 +25,16 @@ const PokemonStatsAndImageAndName = ({ data, id }) => {
           {data?.[0]?.stats.map((stat, i) => {
             return (
               <div
-                className={classes.containerOfPeragraphsOfPokemonStats}
+                className={classes.containerOfParagraphsOfPokemonStats}
                 key={i}
                 id="modal-modal-title"
                 variant="h6"
                 component="h2"
               >
-                <h1 className={classes.typePeragraphInpokemonStats}>
+                <h1 className={classes.typeParagraphInPokemonStats}>
                   {stat.stat.name.toUpperCase()} :
                 </h1>
-                <span className={classes.statsNumbersPeragraph}>
+                <span className={classes.statsNumbersParagraph}>
                   {stat.base_stat}
                 </span>
               </div>

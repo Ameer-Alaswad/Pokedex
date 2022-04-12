@@ -3,13 +3,18 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { theme } from "../pokemonDataStyles";
 
-const PokemonTpyes = ({ data }) => {
+const PokemonTypes = ({ data }) => {
   let pokemonTypes = data?.[0]?.types?.map((type, i) => {
     return type.type.name;
   });
   return (
     <Box sx={{ display: "flex" }}>
-      <Typography id="modal-modal-title" variant="h6" component="h2">
+      <Typography
+        data-test-id="typesOrType"
+        id="modal-modal-title"
+        variant="h6"
+        component="h2"
+      >
         <strong>{pokemonTypes?.length > 1 ? "Types:" : "Type:"}</strong>
       </Typography>
       {pokemonTypes?.map((type, i) => {
@@ -27,4 +32,4 @@ const PokemonTpyes = ({ data }) => {
     </Box>
   );
 };
-export default PokemonTpyes;
+export default PokemonTypes;
