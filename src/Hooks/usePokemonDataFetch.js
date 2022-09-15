@@ -8,6 +8,7 @@ import {
 } from "../components/fetchData";
 
 export default function usePokemonDataFetch() {
+  console.log("hi");
   let thereIsThirdEvolution = false;
   let thereIsSecondEvolution = false;
   const { id } = useParams();
